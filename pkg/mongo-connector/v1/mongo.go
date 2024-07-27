@@ -10,8 +10,6 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/readpref"
 )
 
-var MongoClient *mongo.Client
-
 type Mongo struct {
 	URI                  string               `yaml:"uri"`
 	Username             string               `yaml:"username"`
@@ -81,8 +79,6 @@ func (mongo *Mongo) InitializeMongoConnection() (*mongo.Client, error) {
 	}
 
 	log.Println("Connected to MongoDB")
-
-	MongoClient = client
 
 	return client, nil
 }
