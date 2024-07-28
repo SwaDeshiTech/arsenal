@@ -5,6 +5,7 @@ import (
 	"log"
 	"time"
 
+	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"go.mongodb.org/mongo-driver/mongo/readpref"
@@ -23,6 +24,11 @@ type ConnectionPoolDetail struct {
 	MaxIdleTime     int64  `yaml:"maxIdleTime"`
 	MaxConnIdleTime int64  `yaml:"maxConnIdleTime"`
 	ConnectTimeout  int64  `yaml:"connectTimeout"`
+}
+
+type ResultCriteria struct {
+	Filters bson.M `json:"filters"`
+	Sort    bson.D `json:"sort"`
 }
 
 func Connect(clientOptions *options.ClientOptions, poolOptions *options.ClientOptions) (*mongo.Client, context.Context, context.CancelFunc, error) {
