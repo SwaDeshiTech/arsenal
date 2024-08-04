@@ -69,3 +69,19 @@ func (messageHandler *MessageHandler) SendMessageHandler() {
 	}
 	// wait for message deliveries before shutting down
 }
+
+func (kafkaConfig *KafkaConfig) GetConsumer() (*kafka.Consumer, error) {
+
+	config := kafka.ConfigMap{
+		"bootstrap.servers": kafkaConfig.URL,
+		"group.id":          kafkaConfig.GroupID,
+		"auto.offset.reset": "earliest",
+	}
+
+	consumer, err := kafka.NewConsumer(&config)
+	if err != nil {
+		log.Println("failed to get kafka consumer", err)
+		return nil, err
+	}
+	return consumer, nil
+}
