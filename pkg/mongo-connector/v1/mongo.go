@@ -29,6 +29,7 @@ type ConnectionPoolDetail struct {
 type ResultCriteria struct {
 	Filters bson.M `json:"filters"`
 	Sort    bson.D `json:"sort"`
+	Update  bson.M `json:"update"`
 }
 
 func Connect(clientOptions *options.ClientOptions, poolOptions *options.ClientOptions) (*mongo.Client, context.Context, context.CancelFunc, error) {
