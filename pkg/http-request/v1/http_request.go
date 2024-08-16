@@ -53,14 +53,12 @@ func addHeadersToRequest(req *http.Request, headers map[string]string) {
 }
 
 func createBodyPayload(body interface{}) (io.Reader, error) {
-	var payload *bytes.Buffer
-
 	if body != nil {
 		d, err := json.Marshal(body)
 		if err != nil {
 			return nil, err
 		}
-		payload = bytes.NewBuffer(d)
+		return bytes.NewBuffer(d), nil
 	}
-	return payload, nil
+	return nil, nil
 }
